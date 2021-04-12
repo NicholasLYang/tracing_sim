@@ -39,7 +39,7 @@ CM_FILTER_NAME = "rs-filter"
 
 
 def inject_istio():
-    cmd = f"{ISTIO_BIN} install --set profile=demo "
+    cmd = f"{ISTIO_BIN} install --set profile=preview "
     cmd += "--set meshConfig.enableTracing=true --skip-confirmation "
     result = util.exec_process(cmd)
     if result != util.EXIT_SUCCESS:
@@ -220,7 +220,7 @@ def do_burst(platform):
 
 
 def start_fortio(gateway_url):
-    cmd = f"{FILE_DIR}/bin/fortio "
+    cmd = f"fortio "
     cmd += "load -c 50 -qps 300 -jitter -t 0 -loglevel Warning "
     cmd += f"http://{gateway_url}/productpage"
     fortio_proc = util.start_process(cmd, preexec_fn=os.setsid)
